@@ -67,5 +67,6 @@
       </Label>
       <Text layoutX="344.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result" wrappingWidth="145.9830722808838" />
       <TextField fx:id="Result" layoutX="347.0" layoutY="277.0" prefHeight="142.0" prefWidth="219.0" />
+      <TextField fx:id="test" layoutX="239.0" layoutY="115.0" />
    </children>
 </Pane>

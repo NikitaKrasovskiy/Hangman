@@ -52,16 +52,18 @@ public class HangmanController  {
     private Label text_count;
 
     @FXML
-    void Check(ActionEvent event) {
-        lettering = false;
-        checkLetter();
-        checkResultGame();
-    }
-    @FXML
     private TextField inputUser;
 
     @FXML
     private TextField Result;
+
+    @FXML
+    void Check(ActionEvent event) {
+        lettering = false;
+        checkLetter();
+        checkResultGame();
+        finishGame();
+    }
     public HangmanController() throws FileNotFoundException {
     }
     Words words = new Words();
@@ -73,19 +75,28 @@ public class HangmanController  {
 
     boolean lettering = false;
 
+    boolean endGame = false;
 
     @FXML
     void initialize() {
         setHint();
     }
+    @FXML
+    private TextField test;
 
     private void checkResultGame() {
         if (gameWin == letter_size) {
             Result.setText("WIN");
+            endGame = true;
         }
         if (life <= 0) {
             Result.setText("lost");
+            endGame = true;
         }
+    }
+
+    private void finishGame() {
+        if (endGame) test.setText("Игра закончена!");
     }
     private void checkLetter() {
         String str = inputUser.getText();
