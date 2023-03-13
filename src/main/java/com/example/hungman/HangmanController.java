@@ -39,32 +39,58 @@ public class HangmanController  {
     ImageView image;
 
 
-    Image image2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_1.png")));
-    Image image3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_2.png")));
-    Image image4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_3.png")));
-    Image image5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_4.png")));
-    Image image6 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_5.png")));
-    Image image7 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_6.png")));
-
+    Image IMAGE2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_1.png")));
+    Image IMAGE3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_2.png")));
+    Image IMAGE4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_3.png")));
+    Image IMAGE5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_4.png")));
+    Image IMAGE6 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_5.png")));
+    Image IMAGE7 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_6.png")));
 
     @FXML
     private TextField textOne;
     @FXML
     private Label text_count;
 
+    @FXML
+    void Check(ActionEvent event) {
+        lettering = false;
+        checkLetter();
+        checkResultGame();
+    }
+    @FXML
+    private TextField inputUser;
+
+    @FXML
+    private TextField Result;
     public HangmanController() throws FileNotFoundException {
     }
+    Words words = new Words();
+    String letter = words.getRandomWords();
+
+    int letter_size = letter.length();
+    int life=6;
+    int gameWin = 0;
+
+    boolean lettering = false;
+
 
     @FXML
     void initialize() {
         setHint();
     }
 
-    @FXML
-    void Check(ActionEvent event) {
+    private void checkResultGame() {
+        if (gameWin == letter_size) {
+            Result.setText("WIN");
+        }
+        if (life <= 0) {
+            Result.setText("lost");
+        }
+    }
+    private void checkLetter() {
         String str = inputUser.getText();
-        System.out.println(inputUser.getText());
         if (letter.contains(str)) {
+            gameWin +=1;
             int index = 0;
             for(int i=0; i<letter.length(); i++) {
                 char c = letter.charAt(i);
@@ -76,16 +102,8 @@ public class HangmanController  {
         }
         else {
             setImage();
-            System.out.println("image");
         }
     }
-@FXML
-private TextField inputUser;
-    Words words = new Words();
-    String letter = words.getRandomWords();
-
-    int letter_size = letter.length();
-
     public void setLetter(int index,String str){
         if(index==0)
             TF1.setText(str);
@@ -131,21 +149,20 @@ private TextField inputUser;
             TF8.setVisible(false);
         }
     }
-    int life=6;
 
     public void setImage(){
         if(life==6)
-            image.setImage(image2);
+            image.setImage(IMAGE2);
         else if(life==5)
-            image.setImage(image3);
+            image.setImage(IMAGE3);
         else if(life==4)
-            image.setImage(image4);
+            image.setImage(IMAGE4);
         else if(life==3)
-            image.setImage(image5);
+            image.setImage(IMAGE5);
         else if(life==2)
-            image.setImage(image6);
+            image.setImage(IMAGE6);
         else if(life==1)
-            image.setImage(image7);
+            image.setImage(IMAGE7);
         life--;
     }
 }
