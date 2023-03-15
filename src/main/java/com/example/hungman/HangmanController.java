@@ -2,6 +2,7 @@ package com.example.hungman;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -57,13 +58,6 @@ public class HangmanController  {
     @FXML
     private TextField Result;
 
-    @FXML
-    void Check(ActionEvent event) {
-        lettering = false;
-        checkLetter();
-        checkResultGame();
-        finishGame();
-    }
     public HangmanController() throws FileNotFoundException {
     }
     Words words = new Words();
@@ -98,23 +92,35 @@ public class HangmanController  {
     private void finishGame() {
         if (endGame) test.setText("Игра закончена!");
     }
-    private void checkLetter() {
-        String str = inputUser.getText();
-        if (letter.contains(str)) {
-            gameWin +=1;
-            int index = 0;
-            for(int i=0; i<letter.length(); i++) {
-                char c = letter.charAt(i);
-                if (String.valueOf(c).equals(str)) {
-                    setLetter(index, Character.toString(c));
-                }
-                index++;
+@FXML
+void OnClick(ActionEvent event) {
+        lettering = false;
+        OnClicks(event);
+        checkResultGame();
+        finishGame();
+}
+
+@FXML
+private void OnClicks(ActionEvent event) {
+    String str = ((Button)event.getSource()).getText(); // считывание введенных букв
+    System.out.println(str);
+    ((Button)event.getSource()).setDisable(true); // выключение нажатых букв (чтобы пользователь не мог больше взаимодейтсоввать с ними)
+    if (letter.contains(str)) {
+        gameWin += 1;
+        int index = 0;
+        for (int i = 0; i < letter.length(); i++) {
+            char c = letter.charAt(i);
+            System.out.println(c);
+            if (String.valueOf(c).equals(str)) {
+                System.out.println("test");
+                setLetter(index, Character.toString(c));
             }
+            index++;
         }
-        else {
-            setImage();
-        }
+    } else {
+        setImage();
     }
+}
     public void setLetter(int index,String str){
         if(index==0)
             TF1.setText(str);

@@ -58,15 +58,51 @@
             <Image url="@picture_0.png" />
          </image>
       </ImageView>
-      <Button fx:id="Check" layoutX="443.0" layoutY="191.0" mnemonicParsing="false" onAction="#Check" prefHeight="46.0" prefWidth="124.0" text="Check" />
-      <TextField fx:id="inputUser" layoutX="363.0" layoutY="191.0" prefHeight="46.0" prefWidth="74.0" />
       <Label fx:id="letter_count" layoutX="30.0" layoutY="93.0" prefHeight="18.0" prefWidth="100.0" text="Label">
          <font>
             <Font size="42.0" />
          </font>
       </Label>
-      <Text layoutX="344.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result" wrappingWidth="145.9830722808838" />
-      <TextField fx:id="Result" layoutX="347.0" layoutY="277.0" prefHeight="142.0" prefWidth="219.0" />
-      <TextField fx:id="test" layoutX="239.0" layoutY="115.0" />
+      <Text layoutX="440.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result" wrappingWidth="145.9830722808838" />
+      <TextField fx:id="Result" layoutX="182.0" layoutY="132.0" prefHeight="26.0" prefWidth="219.0" />
+      <TextField fx:id="test" layoutX="437.0" layoutY="106.0" />
+      <Button layoutX="241.0" layoutY="190.0" minWidth="29.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="29.0" text="А">
+         <font>
+            <Font size="6.0" />
+         </font>
+      </Button>
+      <Button layoutX="349.0" layoutY="190.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="В" />
+      <Button layoutX="399.0" layoutY="193.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Г" />
+      <Button layoutX="452.0" layoutY="193.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Д" />
+      <Button layoutX="505.0" layoutY="193.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Е" />
+      <Button layoutX="295.0" layoutY="190.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Б" />
+      <Button layoutX="241.0" layoutY="218.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ё" />
+      <Button layoutX="295.0" layoutY="218.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ж" />
+      <Button layoutX="349.0" layoutY="218.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="З" />
+      <Button layoutX="402.0" layoutY="218.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="И" />
+      <Button layoutX="455.0" layoutY="221.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Й" />
+      <Button layoutX="508.0" layoutY="221.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="К" />
+      <Button layoutX="242.0" layoutY="252.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Л" />
+      <Button layoutX="295.0" layoutY="252.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="M" />
+      <Button layoutX="349.0" layoutY="252.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Н" />
+      <Button layoutX="403.0" layoutY="252.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="О" />
+      <Button layoutX="455.0" layoutY="252.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="П" />
+      <Button layoutX="508.0" layoutY="252.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Р" />
+      <Button layoutX="241.0" layoutY="283.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="С" />
+      <Button layoutX="295.0" layoutY="283.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Т" />
+      <Button layoutX="349.0" layoutY="283.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="У" />
+      <Button layoutX="402.0" layoutY="283.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ф" />
+      <Button layoutX="455.0" layoutY="283.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Х" />
+      <Button layoutX="508.0" layoutY="283.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ц" />
+      <Button layoutX="242.0" layoutY="314.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ч" />
+      <Button layoutX="295.0" layoutY="314.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ш" />
+      <Button layoutX="349.0" layoutY="314.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Щ" />
+      <Button layoutX="402.0" layoutY="314.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ъ" />
+      <Button layoutX="455.0" layoutY="314.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ы" />
+      <Button layoutX="508.0" layoutY="314.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ь" />
+      <Button layoutX="242.0" layoutY="345.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Э" />
+      <Button layoutX="295.0" layoutY="345.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="Ю" />
+      <Button layoutX="346.0" layoutY="345.0" minHeight="16.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="26.0" text="Я" />
+      <Button layoutX="456.0" layoutY="370.0" minWidth="27.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="31.0" prefWidth="27.0" text="n" />
    </children>
 </Pane>
