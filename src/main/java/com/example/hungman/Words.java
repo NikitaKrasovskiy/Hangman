@@ -12,7 +12,7 @@ public class Words {
     Words() throws FileNotFoundException {
         words = new ArrayList<>();
         Scanner textScanner = null;
-            textScanner = new Scanner(new File("/Users/cherigra/Java/Hungman/src/main/resources/test.txt")); // заменить на обсолютный путь
+            textScanner = new Scanner(new File("C:\\Users\\cherigra\\Desktop\\Hangman\\src\\main\\resources\\test.txt")); // заменить на обсолютный путь
 
         while (textScanner.hasNextLine())
             words.add(textScanner.nextLine());

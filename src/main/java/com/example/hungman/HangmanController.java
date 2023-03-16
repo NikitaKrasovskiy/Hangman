@@ -1,16 +1,19 @@
 package com.example.hungman;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -47,6 +50,7 @@ public class HangmanController  {
 
 
     Image IMAGE2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_1.png")));
+    Image IMAGE0 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_0.png")));
     Image IMAGE3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_2.png")));
     Image IMAGE4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_3.png")));
     Image IMAGE5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_4.png")));
@@ -64,8 +68,6 @@ public class HangmanController  {
     @FXML
     private TextField Result;
 
-    public HangmanController() throws FileNotFoundException {
-    }
     Words words = new Words();
     String letter = words.getRandomWords();
 
@@ -77,9 +79,26 @@ public class HangmanController  {
 
     boolean endGame = false;
 
+    public HangmanController() throws FileNotFoundException {
+    }
+
     @FXML
-    void initialize() {
+    void initialize() throws FileNotFoundException {
+        Result.clear();
+        test.clear();
+        image.setImage(IMAGE0);
+        words = new Words();
+        letter = words.getRandomWords();
+
+        letter_size = letter.length();
+        life=6;
+        gameWin = 0;
+
+        lettering = false;
+
+        endGame = false;
         setHint();
+        buttons.setDisable(false);
     }
     @FXML
     private TextField test;
@@ -88,12 +107,23 @@ public class HangmanController  {
         if (gameWin == letter_size) {
             Result.setText("WIN");
             endGame = true;
+            buttons.setDisable(true);
+//            modalWindowAction();
+            modalWind();
         }
         if (life <= 0) {
             Result.setText("lost");
             endGame = true;
+            buttons.setDisable(true);
+//            modalWindowAction();
+
+                modalWind();
+
+
         }
     }
+    @FXML
+    private FlowPane buttons;
 
     private void finishGame() {
         if (endGame) test.setText("Игра закончена!");
@@ -187,5 +217,45 @@ private void OnClicks(ActionEvent event) {
         else if(life==1)
             image.setImage(IMAGE7);
         life--;
+    }
+
+//    public void modalWindowAction() throws IOException {
+//        Stage stage = new Stage();
+//        Parent root = FXMLLoader.load(
+//                HangmanController.class.getResource("YourClass.fxml"));
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("My modal window");
+//        stage.initModality(Modality.WINDOW_MODAL);
+//        stage.initOwner(
+//                ((Node)event.getSource()).getScene().getWindow() );
+//        stage.show();
+//    }
+
+    void modalWind() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        if (gameWin == letter_size)
+        alert.setContentText("WIN");
+        else if (life <= 0)
+            alert.setContentText("LOSSSSS");
+        alert.showAndWait();
+        for (int i = 0; i < 32; i++) {
+            buttons.getChildren().get(i).setDisable(false);
+        }
+        try {
+            initialize();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    @FXML
+    void newGame(ActionEvent event) throws IOException {
+        for (int i = 0; i < 32; i++) {
+            buttons.getChildren().get(i).setDisable(false);
+        }
+        initialize();
     }
 }
