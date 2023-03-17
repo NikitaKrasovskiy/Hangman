@@ -1,20 +1,12 @@
 package com.example.hungman;
 
-import javafx.beans.binding.BooleanBinding;
+import com.example.hungman.model.Words;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,28 +15,28 @@ import java.util.Objects;
 public class HangmanController  {
 
     @FXML
-    private TextField TF1;
+    public TextField TF1;
 
     @FXML
-    private TextField TF2;
+    public TextField TF2;
 
     @FXML
-    private TextField TF3;
+    public TextField TF3;
 
     @FXML
-    private TextField TF4;
+    public TextField TF4;
 
     @FXML
-    private TextField TF5;
+    public TextField TF5;
 
     @FXML
-    private TextField TF6;
+    public TextField TF6;
 
     @FXML
-    private TextField TF7;
+    public TextField TF7;
 
     @FXML
-    private TextField TF8;
+    public TextField TF8;
     @FXML
     ImageView image;
 
@@ -58,15 +50,17 @@ public class HangmanController  {
     Image IMAGE7 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("picture_6.png")));
 
     @FXML
-    private TextField textOne;
+    public TextField textOne;
     @FXML
-    private Label text_count;
+    public Label text_count;
+    @FXML
+    public Label letter_count;
 
     @FXML
-    private TextField inputUser;
+    public TextField inputUser;
 
     @FXML
-    private TextField Result;
+    public TextField Result;
 
     Words words = new Words();
     String letter = words.getRandomWords();
@@ -78,66 +72,77 @@ public class HangmanController  {
     boolean lettering = false;
 
     boolean endGame = false;
+    String resultGame;
 
     public HangmanController() throws FileNotFoundException {
     }
 
     @FXML
     void initialize() throws FileNotFoundException {
-        Result.clear();
-        test.clear();
-        image.setImage(IMAGE0);
-        words = new Words();
-        letter = words.getRandomWords();
-
-        letter_size = letter.length();
-        life=6;
-        gameWin = 0;
-
-        lettering = false;
-
-        endGame = false;
+        resetWindow();
+        initializetionValue();
         setHint();
         buttons.setDisable(false);
     }
-    @FXML
-    private TextField test;
 
-    private void checkResultGame() {
+    public void initializetionValue() throws FileNotFoundException {
+        image.setImage(IMAGE0);
+        words = new Words();
+        letter = words.getRandomWords();
+        letter_size = letter.length();
+        life=6;
+        gameWin = 0;
+        lettering = false;
+        endGame = false;
+    }
+
+    public void resetWindow() {
+        test.clear();
+        TF1.clear();
+        TF2.clear();
+        TF3.clear();
+        TF4.clear();
+        TF5.clear();
+        TF6.clear();
+        TF7.clear();
+        TF8.clear();
+    }
+
+    @FXML
+    public TextField test;
+
+    public void checkResultGame() {
         if (gameWin == letter_size) {
-            Result.setText("WIN");
+            resultGame = "Выйграли";
             endGame = true;
             buttons.setDisable(true);
-//            modalWindowAction();
             modalWind();
         }
         if (life <= 0) {
-            Result.setText("lost");
+            resultGame = "Проиграли";
             endGame = true;
             buttons.setDisable(true);
-//            modalWindowAction();
-
-                modalWind();
+            modalWind();
 
 
         }
     }
     @FXML
-    private FlowPane buttons;
+    public FlowPane buttons;
 
-    private void finishGame() {
+    public void finishGame() {
         if (endGame) test.setText("Игра закончена!");
     }
 @FXML
 void OnClick(ActionEvent event) {
         lettering = false;
-        OnClicks(event);
+    checkInputUsers(event);
         checkResultGame();
         finishGame();
 }
 
 @FXML
-private void OnClicks(ActionEvent event) {
+public void checkInputUsers(ActionEvent event) {
     String str = ((Button)event.getSource()).getText(); // считывание введенных букв
     System.out.println(str);
     ((Button)event.getSource()).setDisable(true); // выключение нажатых букв (чтобы пользователь не мог больше взаимодейтсоввать с ними)
@@ -175,10 +180,6 @@ private void OnClicks(ActionEvent event) {
         else if(index==7)
             TF8.setText(str);
     }
-    @FXML
-    private Label letter_count;
-
-
     public void setHint(){
 //        hint.setText(hint_str);
         letter_count.setText(letter_size+" Letters");
@@ -219,37 +220,14 @@ private void OnClicks(ActionEvent event) {
         life--;
     }
 
-//    public void modalWindowAction() throws IOException {
-//        Stage stage = new Stage();
-//        Parent root = FXMLLoader.load(
-//                HangmanController.class.getResource("YourClass.fxml"));
-//        stage.setScene(new Scene(root));
-//        stage.setTitle("My modal window");
-//        stage.initModality(Modality.WINDOW_MODAL);
-//        stage.initOwner(
-//                ((Node)event.getSource()).getScene().getWindow() );
-//        stage.show();
-//    }
-
     void modalWind() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
         alert.setTitle("Information");
         alert.setHeaderText(null);
-        if (gameWin == letter_size)
-        alert.setContentText("WIN");
-        else if (life <= 0)
-            alert.setContentText("LOSSSSS");
+//        alert.setContentText(resultGame);
+        alert.setHeaderText("Вы " + resultGame + ", чтобы продолжить нажмите NewGame, чтобы покинуть игру нажмите leave");
         alert.showAndWait();
-        for (int i = 0; i < 32; i++) {
-            buttons.getChildren().get(i).setDisable(false);
-        }
-        try {
-            initialize();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
     }
     @FXML
     void newGame(ActionEvent event) throws IOException {

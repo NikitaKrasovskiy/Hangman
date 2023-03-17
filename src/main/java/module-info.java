@@ -6,4 +6,5 @@ module com.example.hungman {
 
     opens com.example.hungman to javafx.fxml;
     exports com.example.hungman;
+
 }

@@ -1,4 +1,4 @@
-package com.example.hungman;
+package com.example.hungman.model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ public class Words {
 
     private ArrayList<String> words;
 
-    Words() throws FileNotFoundException {
+    public Words() throws FileNotFoundException {
         words = new ArrayList<>();
         Scanner textScanner = null;
             textScanner = new Scanner(new File("/Users/cherigra/Java/Hangman/src/main/resources/test.txt")); // заменить на обсолютный путь
