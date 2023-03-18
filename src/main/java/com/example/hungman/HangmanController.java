@@ -63,7 +63,6 @@ public class HangmanController  {
     public TextField Result;
 
     Game game = new Game();
-
     public HangmanController() throws FileNotFoundException {
     }
 
@@ -73,6 +72,7 @@ public class HangmanController  {
         initializetionValue();
         setHint();
         buttons.setDisable(false);
+        new Game();
     }
 
     public void initializetionValue() throws FileNotFoundException {
@@ -94,16 +94,9 @@ public class HangmanController  {
     @FXML
     public TextField test;
 
-    public void checkResultGame() {
-        if (game.getGameWin() == game.getLetter_size()) {
-            game.setResultGame("Выйграли");
-            game.setEndGame(true);
-            buttons.setDisable(true);
-            modalWind();
-        }
-        if (game.getLife() <= 0) {
-            game.setResultGame("Проиграли");
-            game.setEndGame(true);
+    public void checkResultGameController() {
+        System.out.println(game.getCheckResultGame());
+        if (game.getCheckResultGame()) {
             buttons.setDisable(true);
             modalWind();
         }
@@ -116,32 +109,19 @@ public class HangmanController  {
 void OnClick(ActionEvent event) throws FileNotFoundException {
         game.setLettering(false);
         testCheckInputUsers(event);
-        checkResultGame();
+        checkResultGameController();
 }
 @FXML
 public void testCheckInputUsers(ActionEvent event) throws FileNotFoundException {
-    String str = inputUsers(event);// считывание введенных букв
-    keysPressedted(event); // выключение нажатых букв (чтобы пользователь не мог больше взаимодейтсоввать с ними)
-    String letter = game.getLetter();
-    if (letter.contains(str)) {
-//        gameWin += 1;
-        int index = 0;
-        for (int i = 0; i <letter.length(); i++) {
-            char c = letter.charAt(i);
-            System.out.println(c);
-            if (String.valueOf(c).equals(str)) {
-                setLetter(index, Character.toString(c));
-            }
-            index++;
-        }
+    if (game.CheckInputUsers(inputUsers(event))) {
+        setLetter();
     } else {
         setImage();
     }
 }
-
     private static String inputUsers(ActionEvent event) throws FileNotFoundException {
         String str = ((Button) event.getSource()).getText(); // считывание введенных букв
-        keysPressedted(event);
+        keysPressedted(event); // выключение нажатых букв (чтобы пользователь не мог больше взаимодейтсоввать с ними)
         // выключение нажатых букв (чтобы пользователь не мог больше взаимодейтсоввать с ними)
         return str;
     }
@@ -149,26 +129,32 @@ public void testCheckInputUsers(ActionEvent event) throws FileNotFoundException 
     private static void keysPressedted(ActionEvent event) {
         ((Button) event.getSource()).setDisable(true);
     }
-
-    public void setLetter(int index,String str){
-        System.out.println(index + " index2");
-        if(index==0) {
-            TF1.setText(str);
-        } else if(index==1) {
-            TF2.setText(str);
-        } else if(index==2) {
-            TF3.setText(str);
-        } else if(index==3) {
-            TF4.setText(str);
-        } else if(index==4) {
-            TF5.setText(str);
-        } else if(index==5) {
-            TF6.setText(str);
-        } else if(index==6) {
-            TF7.setText(str);
-        } else if(index==7) {
-            TF8.setText(str);
+public void setLetter(){
+        if(game.getMap().containsKey(0)) {
+            TF1.setText(game.getMap().get(0));
         }
+         if(game.getMap().containsKey(1)) {
+            TF2.setText(game.getMap().get(1));
+        }
+         if(game.getMap().containsKey(2)) {
+            TF3.setText(game.getMap().get(2));
+        }
+         if(game.getMap().containsKey(3)) {
+            TF4.setText(game.getMap().get(3));
+        }
+         if(game.getMap().containsKey(4)) {
+            TF5.setText(game.getMap().get(4));
+        }
+         if(game.getMap().containsKey(5)) {
+            TF6.setText(game.getMap().get(5));
+        }
+         if(game.getMap().containsKey(6)) {
+            TF7.setText(game.getMap().get(6));
+        }
+         if(game.getMap().containsKey(7)) {
+            TF8.setText(game.getMap().get(7));
+        }
+    game.getMap().clear();
     }
     public void setHint(){
         int sizeLetter = game.getLetter_size();
@@ -213,7 +199,6 @@ public void testCheckInputUsers(ActionEvent event) throws FileNotFoundException 
     void modalWind() {
     String str = game.getResultGame();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setHeaderText("Вы " + str + ", чтобы продолжить нажмите NewGame, чтобы покинуть игру нажмите leave");
@@ -226,5 +211,6 @@ public void testCheckInputUsers(ActionEvent event) throws FileNotFoundException 
         }
         initialize();
         game.setLife(6);
+//        game.getGameWin(); // заменить
     }
 }

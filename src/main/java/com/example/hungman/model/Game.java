@@ -1,8 +1,10 @@
 package com.example.hungman.model;
 
-import com.example.hungman.HangmanController;
+import javafx.event.ActionEvent;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
     private  Words words ;
@@ -14,10 +16,10 @@ public class Game {
 
    private boolean lettering;
 
-   private boolean endGame;
    private String str;
-    private String resultGame;
+   private String resultGame;
 
+   private Map<Integer, String> map = new HashMap<>();
 
 
     public Game() throws FileNotFoundException {
@@ -27,8 +29,47 @@ public class Game {
         life=6;
         gameWin = 0;
         lettering = false;
-        endGame = false;
+    }
 
+
+    public boolean CheckInputUsers(String str) throws FileNotFoundException {
+        boolean isFlag = false;
+        String letter = this.letter;
+        if (letter.contains(str)) {
+            gameWin++;
+            int index = 0;
+            for (int i = 0; i <letter.length(); i++) {
+                char c = letter.charAt(i);
+                if (String.valueOf(c).equals(str)) {
+                    map.put(i, Character.toString(c));
+                    isFlag = true;
+                }
+                index++;
+            }
+        }
+        return isFlag;
+    }
+
+    public boolean getCheckResultGame() {
+        boolean endGame = false;
+        System.out.println(gameWin);
+        if (gameWin == letter_size) {
+            resultGame = "Выйграли";
+            endGame = true;
+        }
+        if (life <= 0) {
+            resultGame = "Проиграли";
+            endGame = true;
+        }
+        return  endGame;
+    }
+
+    public  int getGameWin() {
+        return gameWin = 0; // заменить
+    }
+
+    public Map<Integer, String> getMap() {
+        return map;
     }
 
     public void setLife(int life) {
@@ -41,14 +82,6 @@ public class Game {
 
     public void setLettering(boolean lettering) {
         this.lettering = lettering;
-    }
-
-    public static void setGameWin(int gameWin) {
-        Game.gameWin = gameWin;
-    }
-
-    public void setEndGame(boolean endGame) {
-        this.endGame = endGame;
     }
 
     public void setResultGame(String resultGame) {
@@ -79,16 +112,9 @@ public class Game {
         return life;
     }
 
-    public int getGameWin() {
-        return gameWin;
-    }
 
     public boolean isLettering() {
         return lettering;
-    }
-
-    public boolean isEndGame() {
-        return endGame;
     }
 
     public String getResultGame() {

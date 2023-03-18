@@ -1,4 +1,5 @@
 package com.example.hungman;
 
-public class Main {
+public class HangmanView {
+
 }
